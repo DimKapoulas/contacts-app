@@ -66,6 +66,6 @@ def have_a_contact(contactbook, contactname):
 def runcommand(contactbook, command):
     contactbook.run(command)
 
-@then("My contacts list now is now empty")
+@then("My contacts list is now empty")
 def emptlylist(contactbook):
     assert contactbook._contacts == []
