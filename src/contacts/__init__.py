@@ -23,11 +23,11 @@ class Application:
         _, cmd = text.split(maxsplit=1)
         try:
             cmd, args = cmd.split(maxsplit=1)
-            name, num = args.rsplit(maxsplit=1)
         except ValueError:
             args = None
 
         if cmd == "add":
+            name, num = args.rsplit(maxsplit=1) # type: ignore # mypy ignorance of exception hanlding
             try:
                 self.add(name, num)
             except ValueError as err:
@@ -35,7 +35,6 @@ class Application:
                 return
         elif cmd == "del":
             self.delete(args)
-
         else:
             raise ValueError(f"Invalid command: {cmd}")
 

@@ -6,4 +6,4 @@ Feature: Deleting Contacts
         Given I have a contact book
         And I have a "John" contact
         When I run the "contacts del John" command
-        Then My contacts list is now empty
+        Then My contacts book is now empty

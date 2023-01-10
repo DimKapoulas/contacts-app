@@ -49,23 +49,27 @@ class TestAddingEntries:
 
         assert app._contacts == [("NAME", "3344554433")]
 
+
 @scenario("../acceptance/delete_contact.feature", "Removing a Basic Contact")
 def test_deleting_contact():
     pass
-    
+
 
 @given("I have a contact book", target_fixture="contactbook")
 def contactbook():
     return contacts.Application()
 
-@given(parsers.parse("I have a \"{contactname}\" contact"))
+
+@given(parsers.parse('I have a "{contactname}" contact'))
 def have_a_contact(contactbook, contactname):
     contactbook.add(contactname, "000")
 
-@when(parsers.parse("I run the \"{command}\" command"))
+
+@when(parsers.parse('I run the "{command}" command'))
 def runcommand(contactbook, command):
     contactbook.run(command)
 
-@then("My contacts list is now empty")
+
+@then("My contacts book is now empty")
 def emptlylist(contactbook):
     assert contactbook._contacts == []
