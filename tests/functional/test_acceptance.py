@@ -1,7 +1,7 @@
 import contacts
 
 
-class TestAddingEntries(self):
+class TestAddingEntries:
     def test_basic(self):
         app = contacts.Application()
 
@@ -22,28 +22,28 @@ class TestAddingEntries(self):
             ("Princess Peach Toadstool", "3339323323"),
         ]
 
-        def test_international_numbers(self):
-            app = contancts.Application()
+    def test_international_numbers(self):
+        app = contacts.Application()
 
-            app.run("contacts add NAME +393344554433")
+        app.run("contacts add NAME +393344554433")
 
-            assert app._contacts == [("NAME", "+393344554433")]
+        assert app._contacts == [("NAME", "+393344554433")]
 
-        def test_invalid_strings(self):
-            app = contacts.Application()
+    def test_invalid_strings(self):
+        app = contacts.Application()
 
-            app.run("contacts add NAME InvalidString")
+        app.run("contacts add NAME InvalidString")
 
-            assert app._contacts == []
+        assert app._contacts == []
 
-        def test_reload(self):
-            app = contacts.Application()
+    def test_reload(self):
+        app = contacts.Application()
 
-            app.run("contacts add NAME 3344554433")
+        app.run("contacts add NAME 3344554433")
 
-            assert app._contacts == [("NAME", "3344554433")]
+        assert app._contacts == [("NAME", "3344554433")]
 
-            app._clear()
-            app.load()
+        app._clear()
+        app.load()
 
-            assert app._contacts == [("NAME", "3344554433")]
+        assert app._contacts == [("NAME", "3344554433")]
