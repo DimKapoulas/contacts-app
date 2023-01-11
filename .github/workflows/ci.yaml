@@ -28,5 +28,5 @@ jobs:
           black src/
       - name: Test with pytest
         run: |
-          pytest --cache-clear --cov=contacts >  pytest-coverage.txt
+          pytest
       
