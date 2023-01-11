@@ -20,6 +20,7 @@ class Application:
     def run(self, text: str) -> None:
         """Runs the command provided"""
         cmd: str
+        text = text.strip()
         _, cmd = text.split(maxsplit=1)
         try:
             cmd, args = cmd.split(maxsplit=1)
@@ -68,10 +69,22 @@ class Application:
 
     def load(self) -> None:
         """Loads the saved contacts of the app"""
-        with open("./contacts.json", encoding="utf-8") as f:
-            self._contacts = [tuple(entry) for entry in json.load(f)["_contacts"]]
+        try:
+            with open("./contacts.json", "r+", encoding="utf-8") as f:
+                self._contacts = [tuple(entry) for entry in json.load(f)["_contacts"]]
+        except:
+            self._clear()
+            with open("./contacts.json", "w+", encoding="utf-8") as f:
+                self.save()
 
     def save(self) -> None:
         """Saves contact in json format"""
         with open("./contacts.json", "w+", encoding="utf-8") as f:
             json.dump({"_contacts": self._contacts}, f)
+
+def main():
+    import sys
+
+    app = Application()
+    app.load()
+    app.run(' '.join(sys.argv))

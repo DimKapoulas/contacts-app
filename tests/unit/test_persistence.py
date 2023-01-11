@@ -1,5 +1,5 @@
 import json
-from pathlib import Path
+import os
 
 from contacts import Application
 
@@ -10,26 +10,23 @@ class TestLoading:
 
         with open("./contacts.json", "+w") as f:
             json.dump({"_contacts": [("NAME SURNAME", "3333")]}, f)
-        
+
         app.load()
 
-        assert app._contacts == [
-            ("NAME SURNAME", "3333")
-        ]
+        assert app._contacts == [("NAME SURNAME", "3333")]
+
 
 class TestSaving:
     def test_save(self):
         app = Application()
-        app._contacts = [
-            ("NAME SURNAME", "3333")
-        ]
+        app._contacts = [("NAME SURNAME", "3333")]
 
         try:
-            Path("./contacts.json").unlink()
+            os.unlink("./contacts.json")
         except FileNotFoundError:
             pass
 
         app.save()
 
-        with open("./contacts.json") as f:
+        with open("./contacts.json", "r") as f:
             assert json.load(f) == {"_contacts": [["NAME SURNAME", "3333"]]}
