@@ -1,3 +1,3 @@
 from setuptools import setup
 
-setup(name='contacts', packages=['contacts'])
+setup(name="contacts", packages=["contacts"])

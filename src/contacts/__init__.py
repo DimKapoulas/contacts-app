@@ -57,7 +57,6 @@ class Application:
         """Prints a list of all contacts included in the contactbook"""
         print(*(f"{c[0]} {c[1]}" for c in self._contacts), sep="\n")
 
-
     def validate_phone_number(self, phonenum: str) -> None:
         """Helper function for validating the provided phone number
         Raises: ValueError if phonenumber is not string or in invalid format"""
@@ -82,9 +81,10 @@ class Application:
         with open("./contacts.json", "w+", encoding="utf-8") as f:
             json.dump({"_contacts": self._contacts}, f)
 
+
 def main():
     import sys
 
     app = Application()
     app.load()
-    app.run(' '.join(sys.argv))
+    app.run(" ".join(sys.argv))
