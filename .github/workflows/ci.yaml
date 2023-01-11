@@ -26,6 +26,9 @@ jobs:
       - name: Lint with Black
         run: |
           black src/
+      - name: Check Type with mypy
+        run: |
+          mypy src/
       - name: Test and build coverage file
         run: |
           pytest --cache-clear --cov=contacts tests/ > pytest-coverage.txt
