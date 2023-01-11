@@ -27,14 +27,16 @@ class Application:
             args = None
 
         if cmd == "add":
-            name, num = args.rsplit(maxsplit=1) # type: ignore # mypy ignorance of exception hanlding
+            name, num = args.rsplit(maxsplit=1)  # type: ignore # mypy ignorance of exception hanlding
             try:
                 self.add(name, num)
             except ValueError as err:
                 print(err)
                 return
         elif cmd == "del":
-            self.delete(args)
+            self.print_list()
+        elif cmd == "ls":
+            pass
         else:
             raise ValueError(f"Invalid command: {cmd}")
 
@@ -49,6 +51,10 @@ class Application:
         Does nothing if no or wrong name provided"""
         self._contacts = [c for c in self._contacts if c[0] != name]
         self.save()
+
+    def print_list():
+        """Prints a list of all contacts included in the contactbook"""
+        pass
 
     def validate_phone_number(self, phonenum: str) -> None:
         """Helper function for validating the provided phone number

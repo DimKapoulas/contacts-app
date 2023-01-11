@@ -50,6 +50,10 @@ class TestAddingEntries:
         assert app._contacts == [("NAME", "3344554433")]
 
 
+@scenario("../acceptance/list_contacts.feature", "Listing Added Contacts")
+def test_listing_added_contacts(capsys):
+    pass
+
 @scenario("../acceptance/delete_contact.feature", "Removing a Basic Contact")
 def test_deleting_contact():
     pass
@@ -58,6 +62,24 @@ def test_deleting_contact():
 @given("I have a contact book", target_fixture="contactbook")
 def contactbook():
     return contacts.Application()
+
+@given(parsers.parse("I have a first {first} contact"))
+def have_a_first_contact(contactbook, first):
+    contactbook.add(first, "000")
+    return first
+
+@given(parsers.parse("I have a second {second} contact"))
+def have_a_second_contact(contactbook, second):
+    contactbook.add(second, "000")
+    return second
+
+@then(parsers.parse("the output contains {listed_contacts} contacts"))
+def output_contains(listed_contacts, capsys):
+    expected_list = "".join([
+        f"{c} 000\name" for c in listed_contacts.split(",")
+    ])
+    out, _ = capsys.readouterr()
+    assert expected_list == out
 
 
 @given(parsers.parse('I have a "{contactname}" contact'))
