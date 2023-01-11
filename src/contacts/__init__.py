@@ -34,9 +34,9 @@ class Application:
                 print(err)
                 return
         elif cmd == "del":
-            self.print_list()
+            self.delete(args)
         elif cmd == "ls":
-            pass
+            self.print_list()
         else:
             raise ValueError(f"Invalid command: {cmd}")
 
@@ -52,9 +52,10 @@ class Application:
         self._contacts = [c for c in self._contacts if c[0] != name]
         self.save()
 
-    def print_list():
+    def print_list(self):
         """Prints a list of all contacts included in the contactbook"""
-        pass
+        print(*(f"{c[0]} {c[1]}" for c in self._contacts), sep="\n")
+
 
     def validate_phone_number(self, phonenum: str) -> None:
         """Helper function for validating the provided phone number

@@ -76,7 +76,7 @@ def have_a_second_contact(contactbook, second):
 @then(parsers.parse("the output contains {listed_contacts} contacts"))
 def output_contains(listed_contacts, capsys):
     expected_list = "".join([
-        f"{c} 000\name" for c in listed_contacts.split(",")
+        f"{c} 000\n" for c in listed_contacts.split(",")
     ])
     out, _ = capsys.readouterr()
     assert expected_list == out
