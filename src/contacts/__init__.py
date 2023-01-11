@@ -1,4 +1,4 @@
-from typing import List, Tuple, Any
+from typing import List, Tuple, Any, Optional
 import re
 import json
 
@@ -47,7 +47,7 @@ class Application:
         self._contacts.append((name, phonenum))
         self.save()
 
-    def delete(self, name: str | None) -> None:
+    def delete(self, name: Optional[str]) -> None:
         """Deletes contact with the given NAME [SURNAME].
         Does nothing if no or wrong name provided"""
         self._contacts = [c for c in self._contacts if c[0] != name]
